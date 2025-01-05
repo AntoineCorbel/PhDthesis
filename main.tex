@@ -1,0 +1,27 @@
+\documentclass{report}
+
+\input{config/packages.tex}
+
+\begin{document}
+
+\input{frontmatter/titlepage.tex}
+\input{frontmatter/abstract.tex}
+\input{frontmatter/acknowledgements.tex}
+
+\tableofcontents
+
+\input{chapters/intro.tex}
+% \input{chapters/intro/section_1.tex}
+
+\input{chapters/chap_1/section_1.tex}
+\input{chapters/chap_1/section_2.tex}
+
+\input{chapters/chap_2/section_1.tex}
+\input{chapters/chap_2/section_2.tex}
+
+\input{backmatter/appendix.tex}
+
+\bibliographystyle{abbrv} %ieeetr, acm... 
+\bibliography{bibliography}
+
+\end{document}

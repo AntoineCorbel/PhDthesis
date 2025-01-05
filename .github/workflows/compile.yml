@@ -1,0 +1,35 @@
+name: Compile LaTeX
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up TeX Live
+        uses: xu-cheng/texlive-action@v2
+        with:
+          texlive_version: latest
+
+      - name: Create output directory
+        run: mkdir -p out
+
+      - name: Compile LaTeX
+        run: |
+          pdflatex -output-directory=out main.tex
+          cp bibliography.bib out/
+          cd out && bibtex main
+          pdflatex -output-directory=out main.tex
+          pdflatex -output-directory=out main.tex
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: thesis.pdf
+          path: out/main.pdf
